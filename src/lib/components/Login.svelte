@@ -9,6 +9,10 @@
     <h1>PrettyTable</h1>
     <p>Give your timetable a little more <em>pizzazz</em>.</p>
     <PrimaryButton>Log in with SBHS</PrimaryButton>
+    <p class="muted">
+      Made by <a href="https://iamkneel.vercel.app">iamkneel</a> |
+      <a href="https://www.github.com/neelkarma/prettytable">Source</a>
+    </p>
   </FlexCol>
 </form>
 
@@ -19,5 +23,13 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  .muted {
+    color: #808080;
   }
 </style>
