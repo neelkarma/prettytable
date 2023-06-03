@@ -34,6 +34,13 @@
     $config = result;
     uploadMessage = "Import successful!";
   };
+
+  const handleReset = () => {
+    // Removing the config from localStorage will automatically use defaults on next reload
+    // It's also less of a pain than resetting every config value manually
+    localStorage.removeItem("config");
+    location.reload();
+  };
 </script>
 
 <div class="p-4 rounded-md border-[1px] border-slate-400 bg-slate-100">
@@ -93,6 +100,7 @@
         />
         {uploadMessage}
       </label>
+      <Button on:click={handleReset}>Reset to Defaults</Button>
     </ConfigSection>
   </FlexCol>
 </div>
