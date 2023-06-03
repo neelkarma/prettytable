@@ -1,8 +1,23 @@
 <script lang="ts">
   import { styleTimetable } from "$lib/actions";
   import type { APIResponse } from "$lib/server/types";
-  import { config } from "$lib/stores";
+  import { config, validateConfig } from "$lib/stores";
   import { getHumanDay, transformAPIResponse } from "$lib/transform";
+  import { onMount } from "svelte";
+
+  onMount(() => {
+    const localCfgStr = localStorage.getItem("config");
+    if (localCfgStr) {
+      const localCfg = JSON.parse(localCfgStr);
+      if (validateConfig(localCfg)) {
+        $config = localCfg;
+      }
+    }
+
+    config.subscribe((cfg) => {
+      localStorage.setItem("config", JSON.stringify(cfg));
+    });
+  });
 
   export let data: APIResponse;
   const transformed = transformAPIResponse(data);
