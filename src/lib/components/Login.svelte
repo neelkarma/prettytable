@@ -1,35 +1,21 @@
 <script>
   import { enhance } from "$app/forms";
-  import FlexCol from "./FlexCol.svelte";
   import PrimaryButton from "./PrimaryButton.svelte";
 </script>
 
-<form method="POST" action="/auth?/login" use:enhance>
-  <FlexCol>
-    <h1>PrettyTable</h1>
-    <p>Give your timetable a little more <em>pizzazz</em>.</p>
+<form
+  class="flex flex-col justify-center items-center min-h-screen"
+  method="POST"
+  action="/auth?/login"
+  use:enhance
+>
+  <div class="flex flex-col gap-3 text-center">
+    <h1 class="font-bold text-4xl">PrettyTable</h1>
+    <p>Give your timetable a little more ✨ <em>pizzazz</em> ✨.</p>
     <PrimaryButton>Log in with SBHS</PrimaryButton>
-    <p class="muted">
+    <p class="text-slate-500">
       Made by <a href="https://iamkneel.vercel.app">iamkneel</a> |
       <a href="https://www.github.com/neelkarma/prettytable">Source</a>
     </p>
-  </FlexCol>
+  </div>
 </form>
-
-<style>
-  form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-  }
-
-  a {
-    color: inherit;
-  }
-
-  .muted {
-    color: #808080;
-  }
-</style>

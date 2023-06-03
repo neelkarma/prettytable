@@ -1,13 +1,9 @@
 <script>
-  import Button from "./Button.svelte";
 </script>
 
-<Button
+<button
   on:click
-  --idleBg="#4444ff"
-  --hoverBg="#2222ff"
-  --color="#fff"
-  --fontWeight="bold"
+  class="p-2 rounded-md font-bold text-white bg-blue-600 border-[1px] border-slate-500 hover:bg-blue-700 transition-colors"
 >
   <slot />
-</Button>
+</button>

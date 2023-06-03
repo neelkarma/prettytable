@@ -2,7 +2,7 @@
   import { enhance } from "$app/forms";
   import { domToPng } from "modern-screenshot";
   import Button from "./Button.svelte";
-  import Configuration from "./Configuration.svelte";
+  import Theming from "./Config.svelte";
   import Container from "./Container.svelte";
   import FlexRow from "./FlexRow.svelte";
   import PrimaryButton from "./PrimaryButton.svelte";
@@ -21,19 +21,13 @@
 
 <Container>
   <FlexRow>
-    <PrimaryButton on:click={handleRender}>Render and Save</PrimaryButton>
+    <PrimaryButton on:click={handleRender}>Export</PrimaryButton>
     <form method="POST" action="/auth?/logout" use:enhance>
       <Button>Log Out</Button>
     </form>
   </FlexRow>
-  <div class="centered-timetable">
+  <div class="mx-auto">
     <Timetable {data} />
   </div>
-  <Configuration />
+  <Theming />
 </Container>
-
-<style>
-  .centered-timetable {
-    margin: 0 auto;
-  }
-</style>

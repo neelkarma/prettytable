@@ -1,8 +1,1 @@
-<div><slot /></div>
-
-<style>
-  div {
-    display: flex;
-    gap: 8px;
-  }
-</style>
+<div class="flex gap-2"><slot /></div>

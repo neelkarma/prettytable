@@ -1,9 +1,1 @@
-<div><slot /></div>
-
-<style>
-  div {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-</style>
+<div class="flex flex-col gap-5"><slot /></div>
