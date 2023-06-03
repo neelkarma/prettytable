@@ -1,8 +1,39 @@
 <script lang="ts">
-  import { config } from "$lib/stores";
+  import { config, validateConfig } from "$lib/stores";
+  import Button from "./Button.svelte";
   import ConfigFontInput from "./ConfigFontInput.svelte";
   import ConfigSection from "./ConfigSection.svelte";
   import FlexCol from "./FlexCol.svelte";
+
+  const handleSaveConfig = () => {
+    const a = document.createElement("a");
+    a.href =
+      "data:text/json;charset=utf-8," +
+      encodeURIComponent(JSON.stringify($config));
+    a.download = "prettytable.json";
+    a.click();
+  };
+
+  let uploadMessage = "";
+
+  const handleImportConfig = async (e: Event) => {
+    const reader = new FileReader();
+    reader.readAsText((e.target as HTMLInputElement).files![0]);
+    const readEvent = await new Promise<ProgressEvent<FileReader>>(
+      (res) => (reader.onload = res)
+    );
+    const result = JSON.parse(
+      (readEvent.target as FileReader).result! as string
+    );
+
+    if (!validateConfig(result)) {
+      uploadMessage = "Invalid config format!";
+      return;
+    }
+
+    $config = result;
+    uploadMessage = "Import successful!";
+  };
 </script>
 
 <div class="p-4 rounded-md border-[1px] border-slate-400 bg-slate-100">
@@ -49,6 +80,18 @@
       <label>
         Include Period 0
         <input type="checkbox" bind:checked={$config.includePeriodZero} />
+      </label>
+    </ConfigSection>
+    <ConfigSection title="Save">
+      <Button on:click={handleSaveConfig}>Save Config</Button>
+      <label
+        >Import Config
+        <input
+          type="file"
+          accept="application/json"
+          on:change={handleImportConfig}
+        />
+        {uploadMessage}
       </label>
     </ConfigSection>
   </FlexCol>

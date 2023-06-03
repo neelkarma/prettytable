@@ -75,3 +75,40 @@ export const config = writable<Config>({
   },
   includePeriodZero: true,
 });
+
+export const validateConfig = (config: any): config is Config => {
+  console.log(config);
+  // Colors
+  for (const key of ["bg", "separator"]) {
+    console.log(typeof config.colors[key]);
+    if (typeof config.colors[key] !== "string") return false;
+  }
+
+  console.log("hit 1");
+
+  // Fonts
+  for (const key of ["day", "period", "class", "room"]) {
+    if (
+      typeof config.fonts[key].family !== "string" ||
+      typeof config.fonts[key].color !== "string" ||
+      typeof config.fonts[key].size !== "number" ||
+      typeof config.fonts[key].bold !== "boolean" ||
+      typeof config.fonts[key].italic !== "boolean" ||
+      typeof config.fonts[key].underline !== "boolean"
+    )
+      return false;
+  }
+  console.log("hit 2");
+
+  // Gaps
+  for (const key of ["outer", "week", "day", "period"]) {
+    if (typeof config.gaps[key] !== "number") return false;
+  }
+  console.log("hit 3");
+
+  // Other
+  if (typeof config.includePeriodZero !== "boolean") return false;
+  console.log("hit 4");
+
+  return true;
+};
