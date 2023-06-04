@@ -16,6 +16,9 @@
 
   let uploadMessage = "";
 
+  let uploadFileInput: HTMLInputElement;
+  const handleImportConfigClick = () => uploadFileInput.click();
+
   const handleImportConfig = async (e: Event) => {
     const reader = new FileReader();
     reader.readAsText((e.target as HTMLInputElement).files![0]);
@@ -43,45 +46,65 @@
   };
 </script>
 
-<div class="p-4 rounded-md border-[1px] border-slate-400 bg-slate-100">
+<div class="p-4 bg-slate-100">
   <FlexCol>
     <ConfigSection title="Colors">
-      <label>
-        Background:
-        <input type="color" bind:value={$config.colors.bg} />
-      </label>
-      <label>
-        Separator:
-        <input type="color" bind:value={$config.colors.separator} />
-      </label>
+      <div class="grid grid-cols-form gap-x-2 gap-y-1 items-center">
+        <label class="text-right" for="bg-color-input">Background</label>
+        <input
+          id="bg-color-input"
+          type="color"
+          bind:value={$config.colors.bg}
+        />
+        <label class="text-right" for="separator-color-input">Separator</label>
+        <input
+          id="separator-color-input"
+          type="color"
+          bind:value={$config.colors.separator}
+        />
+      </div>
     </ConfigSection>
     <ConfigSection title="Fonts">
-      Day:
+      Day
       <ConfigFontInput key="day" />
-      Period:
+      Period
       <ConfigFontInput key="period" />
-      Class:
+      Class
       <ConfigFontInput key="class" />
-      Room:
+      Room
       <ConfigFontInput key="room" />
     </ConfigSection>
     <ConfigSection title="Gaps">
-      <label>
-        Outer
-        <input type="number" bind:value={$config.gaps.outer} />
-      </label>
-      <label>
-        Week
-        <input type="number" bind:value={$config.gaps.week} />
-      </label>
-      <label>
-        Day
-        <input type="number" bind:value={$config.gaps.day} />
-      </label>
-      <label>
-        Period
-        <input type="number" bind:value={$config.gaps.period} />
-      </label>
+      <div class="w-full grid grid-cols-form items-center gap-x-2 gap-y-1">
+        <label class="text-right" for="outer-gaps-input">Outer</label>
+        <input
+          id="outer-gaps-input"
+          class="p-1 rounded-md border-[1px] border-slate-400 focus:outline-blue-400"
+          type="number"
+          bind:value={$config.gaps.outer}
+        />
+        <label class="text-right" for="week-gaps-input">Week</label>
+        <input
+          id="week-gaps-input"
+          class="p-1 rounded-md border-[1px] border-slate-400 focus:outline-blue-400"
+          type="number"
+          bind:value={$config.gaps.week}
+        />
+        <label class="text-right" for="day-gaps-input">Day</label>
+        <input
+          id="day-gaps-input"
+          class="p-1 rounded-md border-[1px] border-slate-400 focus:outline-blue-400"
+          type="number"
+          bind:value={$config.gaps.day}
+        />
+        <label class="text-right" for="period-gaps-input">Period</label>
+        <input
+          id="period-gaps-input"
+          class="p-1 rounded-md border-[1px] border-slate-400 focus:outline-blue-400"
+          type="number"
+          bind:value={$config.gaps.period}
+        />
+      </div>
     </ConfigSection>
     <ConfigSection title="Other">
       <label>
@@ -91,15 +114,15 @@
     </ConfigSection>
     <ConfigSection title="Save">
       <Button on:click={handleSaveConfig}>Save Config</Button>
-      <label
-        >Import Config
-        <input
-          type="file"
-          accept="application/json"
-          on:change={handleImportConfig}
-        />
-        {uploadMessage}
-      </label>
+      <Button on:click={handleImportConfigClick}>Import Config</Button>
+      <input
+        bind:this={uploadFileInput}
+        class="hidden"
+        type="file"
+        accept="application/json"
+        on:change={handleImportConfig}
+      />
+      {uploadMessage}
       <Button on:click={handleReset}>Reset to Defaults</Button>
     </ConfigSection>
   </FlexCol>

@@ -5,7 +5,11 @@ export default {
     fontFamily: {
       sans: ["Inter", "sans-serif"],
     },
-    extend: {},
+    extend: {
+      gridTemplateColumns: {
+        form: "auto minmax(0, 1fr)",
+      },
+    },
   },
   plugins: [],
 };

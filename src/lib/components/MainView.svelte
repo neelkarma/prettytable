@@ -2,8 +2,7 @@
   import { enhance } from "$app/forms";
   import { domToPng } from "modern-screenshot";
   import Button from "./Button.svelte";
-  import Theming from "./Config.svelte";
-  import Container from "./Container.svelte";
+  import Config from "./Config.svelte";
   import FlexRow from "./FlexRow.svelte";
   import PrimaryButton from "./PrimaryButton.svelte";
   import Timetable from "./Timetable.svelte";
@@ -19,15 +18,17 @@
   };
 </script>
 
-<Container>
-  <FlexRow>
-    <PrimaryButton on:click={handleRender}>Export</PrimaryButton>
-    <form method="POST" action="/auth?/logout" use:enhance>
-      <Button>Log Out</Button>
-    </form>
-  </FlexRow>
-  <div class="mx-auto">
-    <Timetable {data} />
+<div class="flex flex-col-reverse md:flex-row gap-3 md:gap-0 md:min-h-screen">
+  <Config />
+  <div class="p-3 flex grow flex-col gap-3">
+    <FlexRow>
+      <PrimaryButton on:click={handleRender}>Export</PrimaryButton>
+      <form method="POST" action="/auth?/logout" use:enhance>
+        <Button>Log Out</Button>
+      </form>
+    </FlexRow>
+    <div class="mx-auto grow">
+      <Timetable {data} />
+    </div>
   </div>
-  <Theming />
-</Container>
+</div>
